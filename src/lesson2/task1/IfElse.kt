@@ -72,7 +72,9 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
 fun ageDescription(age: Int): String {
     return when {
         (age != 11) and (age % 10 == 1) and (age != 111) -> "$age год"
-        (age % 20 == 2) or (age % 20 == 3) or (age % 20 == 4) or ((age > 130) and ((age % 10 == 2) or (age % 10 == 3) or (age % 10 == 4))) -> "$age года"
+        (age % 20 == 2) or (age % 20 == 3) or (age % 20 == 4) -> "$age года"
+        ((age > 130) and ((age % 10 == 2) or (age % 10 == 3) or (age % 10 == 4))) -> "$age года"
+        ((age > 30) and (age < 100) and ((age % 10 == 2) or (age % 10 == 3) or (age % 10 == 4))) -> "$age года"
         else -> "$age лет"
     }
 }
@@ -153,9 +155,13 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     val sr = sqr(c)
     val sq = sqr(a)
     return when {
-        ((a > b) and (a > c) and (sq == se + sr)) or ((b > a) and (b > c) and (se == sq + sr)) or ((c > b) and (c > a) and (sr == se + sq)) -> 1
-        ((a > b) and (a > c) and (a > b + c)) or ((b > a) and (b > c) and (b > a + c)) or ((c > b) and (c > a) and (c > b + a)) -> -1
-        ((a > b) and (a > c) and (a < b + c) and (sq > se + sr)) or ((b > a) and (b > c) and (b < a + c) and (se > sq + sr)) or ((c > b) and (c > a) and (c < b + a) and (sr > se + sq)) -> 2
+        ((a > b) and (a > c) and (sq == se + sr)) or ((b > a) and (b > c) and (se == sq + sr)) -> 1
+        ((c > b) and (c > a) and (sr == se + sq)) -> 1
+        ((a > b) and (a > c) and (a > b + c)) or ((b > a) and (b > c) and (b > a + c)) -> -1
+        ((c > b) and (c > a) and (c > b + a)) -> -1
+        ((a > b) and (a > c) and (a < b + c) and (sq > se + sr)) -> 2
+        ((b > a) and (b > c) and (b < a + c) and (se > sq + sr)) -> 2
+        ((c > b) and (c > a) and (c < b + a) and (sr > se + sq)) -> 2
         else -> 0
     }
 }
