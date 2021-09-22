@@ -17,7 +17,7 @@ import kotlin.math.sqrt
 fun factorial(n: Int): Double {
     var result = 1.0
     for (i in 1..n) {
-        result = result * i // Please do not fix in master
+        result *= i // Please do not fix in master
     }
     return result
 }
@@ -72,7 +72,19 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    if (n == 0) return 1
+    var sum = 0
+    var number = n
+    while (number != 0) {
+        if (number % 10 >= 0) {
+            sum++
+        }
+        number /= 10
+    }
+    return sum
+}
+
 
 /**
  * Простая (2 балла)
@@ -87,14 +99,33 @@ fun fib(n: Int): Int = TODO()
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var del = 0
+    for (i in 2..n) {
+        if (n % i == 0) {
+            del += i
+            break
+        }
+    }
+    return del
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    var del = 0
+    for (i in 1..n / 2 + 1) {
+        if (n % i == 0) {
+            if (del < i) {
+                del = i
+            }
+        }
+    }
+    return del
+}
 
 /**
  * Простая (2 балла)
