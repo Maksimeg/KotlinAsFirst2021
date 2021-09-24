@@ -130,7 +130,7 @@ fun minDivisor(n: Int): Int {
  */
 fun maxDivisor(n: Int): Int {
     var del = 0
-    for (i in 1..n / 2 + 1) {
+    for (i in 1..n / 2) {
         if (n % i == 0) {
             if (del < i) {
                 del = i
