@@ -226,7 +226,7 @@ fun sin(x: Double, eps: Double): Double {
             fact += 2
         }
     }
-    return sum
+    return if ((sum < -1) or (sum > 1)) 0.0 else sum
 }
 /**
  * Средняя (4 балла)
