@@ -2,6 +2,8 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -212,8 +214,17 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double = TODO()
-
+fun sin(x: Double, eps: Double): Double {
+    var sum = x
+    var nekoe = x
+    var fact = 2
+    while (abs(nekoe) >= eps) {
+        nekoe = (-nekoe * sqr(x)) / (fact * (fact + 1))
+        sum += nekoe
+        fact += 2
+    }
+    return if ((sum < -1) or (sum > 1)) 0.0 else sum
+}
 /**
  * Средняя (4 балла)
  *
