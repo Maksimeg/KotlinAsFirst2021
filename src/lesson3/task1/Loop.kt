@@ -3,6 +3,7 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -218,12 +219,14 @@ fun sin(x: Double, eps: Double): Double {
     var sum = x
     var nekoe = x
     var fact = 2
-    while (abs(nekoe) >= eps) {
-        nekoe = (-nekoe * sqr(x)) / (fact * (fact + 1))
-        sum += nekoe
-        fact += 2
+    if (x > 20 * PI) return 0.0 else {
+        while (abs(nekoe) >= eps) {
+            nekoe = (-nekoe) * sqr(x) / (fact * (fact + 1))
+            sum += nekoe
+            fact += 2
+        }
     }
-    return if ((sum < -1) or (sum > 1)) 0.0 else sum
+    return sum
 }
 /**
  * Средняя (4 балла)
