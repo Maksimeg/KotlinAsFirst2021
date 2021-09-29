@@ -228,6 +228,7 @@ fun sin(x: Double, eps: Double): Double {
     }
     return if ((sum < -1) or (sum > 1)) 0.0 else sum
 }
+
 /**
  * Средняя (4 балла)
  *
@@ -248,7 +249,31 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+
+    var chet = 0
+    var a = 1
+    var cifra = 0
+    for (i in 1..n) {
+        a = sqr(i)
+        while (a > 0) {
+            a /= 10
+            chet += 1
+        }
+        if (chet >= n) {
+            a = sqr(i)
+            break
+
+        }
+    }
+    while (chet >= n) {
+        cifra = a % 10
+        a /= 10
+        chet -= 1
+    }
+    return cifra
+}
+
 
 /**
  * Сложная (5 баллов)
