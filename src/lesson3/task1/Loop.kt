@@ -250,7 +250,6 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun squareSequenceDigit(n: Int): Int {
-
     var chet = 0
     var a = 1
     var cifra = 0
@@ -284,4 +283,32 @@ fun squareSequenceDigit(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var chet = 2
+    var a = 1
+    var cifra = 0
+    var fib1 = 1
+    var fib2 = 1
+    var t: Int
+    if ((n == 1) or (n == 2)) return 1
+    else for (i in 1..n) {
+        a = fib1 + fib2
+        t = a
+        fib1 = fib2
+        fib2 = a
+        while (a > 0) {
+            a /= 10
+            chet += 1
+        }
+        if (chet >= n) {
+            a = t
+            break
+        }
+    }
+    while (chet >= n) {
+        cifra = a % 10
+        a /= 10
+        chet -= 1
+    }
+    return cifra
+}
