@@ -94,11 +94,11 @@ fun angleInRadian(deg: Int, min: Int, sec: Int): Double =
  * Например, расстояние между (3, 0) и (0, 4) равно 5
  */
 fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
-    val sq = sqr(x1 - x2)
-    val sa = sqr(y1 - y2)
-    val qw = sqrt(sq + sa)
-    return qw * 1
+    val const1 = sqr(x1 - x2)
+    val const2 = sqr(y1 - y2)
+    return sqrt(const1 + const2)
 }
+
 
 
 /**
