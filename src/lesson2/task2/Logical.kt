@@ -45,7 +45,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  */
 fun daysInMonth(month: Int, year: Int): Int {
     return when {
-        (month == 1) or (month == 3) or (month == 5) -> 31
+        (month == 1) or (month == 3) or (month == 5) or
         (month == 7) or (month == 8) or (month == 10) or (month == 12) -> 31
         (month == 4) or (month == 6) or (month == 9) or (month == 11) -> 30
         (month == 2) and (year % 400 != 0) and ((year % 4 != 0) or (year % 100 == 0)) -> 28
@@ -63,7 +63,9 @@ fun daysInMonth(month: Int, year: Int): Int {
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = abs(x1 - x2) + abs(y1 - y2) + r1 <= r2
+): Boolean {
+    return if (abs(x1 - x2) + abs(y1 - y2) + r1 <= r2) return true else false
+}
 
 /**
  * Средняя (3 балла)
@@ -75,7 +77,7 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
-    (max(r, s) >= a + b + c - min(min(a, b), c) - max(max(a, b), c)) and
-            (min(r, s) >= min(min(a, b), c))
+    (max(r, s) >= a + b + c - minOf(a,b,c) - maxOf(a,b,c)) and
+            (min(r, s) >= minOf(a,b,c))
 
 
