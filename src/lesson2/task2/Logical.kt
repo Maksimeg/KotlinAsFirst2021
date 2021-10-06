@@ -45,10 +45,10 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  */
 fun daysInMonth(month: Int, year: Int): Int {
     return when {
-        (month == 1) or (month == 3) or (month == 5) or
-        (month == 7) or (month == 8) or (month == 10) or (month == 12) -> 31
-        (month == 4) or (month == 6) or (month == 9) or (month == 11) -> 30
-        (month == 2) and (year % 400 != 0) and ((year % 4 != 0) or (year % 100 == 0)) -> 28
+        (month == 1) || (month == 3) || (month == 5) ||
+        (month == 7) || (month == 8) || (month == 10)|| (month == 12) -> 31
+        (month == 4) || (month == 6) || (month == 9) || (month == 11) -> 30
+        (month == 2) && (year % 400 != 0) && ((year % 4 != 0) || (year % 100 == 0)) -> 28
         else -> 29
     }
 }
