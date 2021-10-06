@@ -92,14 +92,14 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    val x1 = t1 * v1
-    val x2 = t2 * v2
-    val x3 = t3 * v3
-    val sr = (x1 + x2 + x3) / 2
+    val way1 = t1 * v1
+    val way2 = t2 * v2
+    val way3 = t3 * v3
+    val sr = (way1 + way2 + way3) / 2
     return when {
-        sr <= x1 -> sr / v1
-        sr <= x1 + x2 -> t1 + ((sr - x1) / v2)
-        else -> t1 + t2 + ((sr - x1 - x2) / v3)
+        sr <= way1 -> sr / v1
+        sr <= way1 + way2 -> t1 + ((sr - way1) / v2)
+        else -> t1 + t2 + ((sr - way1 - way2) / v3)
     }
 }
 
@@ -151,17 +151,13 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    val se = sqr(b)
-    val sr = sqr(c)
-    val sq = sqr(a)
+    val maximum = maxOf(a, b, c)
+    val mean = minOf(a, b, c)
+    val average = a + b + c -maximum - mean
     return when {
-        ((a > b) and (a > c) and (sq == se + sr)) or ((b > a) and (b > c) and (se == sq + sr)) -> 1
-        ((c > b) and (c > a) and (sr == se + sq)) -> 1
-        ((a > b) and (a > c) and (a > b + c)) or ((b > a) and (b > c) and (b > a + c)) -> -1
-        ((c > b) and (c > a) and (c > b + a)) -> -1
-        ((a > b) and (a > c) and (a < b + c) and (sq > se + sr)) -> 2
-        ((b > a) and (b > c) and (b < a + c) and (se > sq + sr)) -> 2
-        ((c > b) and (c > a) and (c < b + a) and (sr > se + sq)) -> 2
+        sqr(maximum) == sqr(mean) + sqr(average)  -> 1
+        maximum > mean + average-> -1
+        (sqr(maximum) > sqr(mean) + sqr(average)) and (maximum < mean + average)-> 2
         else -> 0
     }
 }
