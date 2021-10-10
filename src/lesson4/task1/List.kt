@@ -165,7 +165,18 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int = TODO()
+fun times(a: List<Int>, b: List<Int>): Int {
+    var summa = 0
+    for ((index, element) in a.withIndex()) {
+        for ((index1, element1) in b.withIndex()) {
+            if (index == index1) {
+            summa +=element * element1}
+        }
+    }
+    return summa
+}
+
+
 
 /**
  * Средняя (3 балла)
