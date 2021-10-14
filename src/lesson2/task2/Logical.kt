@@ -21,10 +21,9 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean {
-    return if ((number % 10 + number / 10 % 10) == (number / 1000 + number / 100 % 10)) return true
-    else false
-}
+fun isNumberHappy(number: Int): Boolean =
+    (number % 10 + number / 10 % 10) == (number / 1000 + number / 100 % 10)
+
 
 
 /**
@@ -63,9 +62,9 @@ fun daysInMonth(month: Int, year: Int): Int {
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean {
-    return if (abs(x1 - x2) + abs(y1 - y2) + r1 <= r2) return true else false
-}
+): Boolean =
+    r2 - (abs(x1 - x2) + abs(y1 - y2)) >= r1
+
 
 /**
  * Средняя (3 балла)
@@ -77,7 +76,7 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
-    (max(r, s) >= a + b + c - minOf(a,b,c) - maxOf(a,b,c)) and
+    (max(r, s) >= a + b + c - minOf(a,b,c) - maxOf(a,b,c)) &&
             (min(r, s) >= minOf(a,b,c))
 
 

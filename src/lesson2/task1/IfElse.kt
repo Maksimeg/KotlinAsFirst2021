@@ -151,12 +151,12 @@ fun rookOrBishopThreatens(
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     val maximum = maxOf(a, b, c)
-    val mean = minOf(a, b, c)
-    val average = a + b + c - maximum - mean
+    val minimal = minOf(a, b, c)
+    val average = a + b + c - maximum - minimal
     return when {
-        sqr(maximum) == sqr(mean) + sqr(average) -> 1
-        maximum > mean + average -> -1
-        (sqr(maximum) > sqr(mean) + sqr(average))  -> 2
+        sqr(maximum) == sqr(minimal) + sqr(average) -> 1
+        maximum > minimal + average -> -1
+        (sqr(maximum) > sqr(minimal) + sqr(average))  -> 2
         else -> 0
     }
 }
