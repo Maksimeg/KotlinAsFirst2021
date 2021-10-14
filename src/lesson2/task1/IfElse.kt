@@ -156,7 +156,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     return when {
         sqr(maximum) == sqr(mean) + sqr(average) -> 1
         maximum > mean + average -> -1
-        (sqr(maximum) > sqr(mean) + sqr(average)) and (maximum < mean + average) -> 2
+        (sqr(maximum) > sqr(mean) + sqr(average))  -> 2
         else -> 0
     }
 }
