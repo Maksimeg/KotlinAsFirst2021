@@ -97,7 +97,7 @@ fun fib(n: Int): Int {
     var fib = 1
     var fib1 = 1
     var fib2 = 1
-    if ((n == 1) or (n == 2)) return 1
+    if ((n == 1) || (n == 2)) return 1
     else {
         for (i in 3..n) {
             fib2 = fib + fib1
@@ -114,14 +114,14 @@ fun fib(n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var del = 0
+    var number = 0
     for (i in 2..n) {
         if (n % i == 0) {
-            del += i
+            number += i
             break
         }
     }
-    return del
+    return number
 }
 
 /**
@@ -129,17 +129,8 @@ fun minDivisor(n: Int): Int {
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int {
-    var del = 0
-    for (i in 1..n / 2) {
-        if (n % i == 0) {
-            if (del < i) {
-                del = i
-            }
-        }
-    }
-    return del
-}
+fun maxDivisor(n: Int): Int = n / minDivisor(n)
+
 
 /**
  * Простая (2 балла)
@@ -250,25 +241,20 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun squareSequenceDigit(n: Int): Int {
-    var chet = 0
-    var a = 1
+    var count = 0
+    var number = 1
     var cifra = 0
     for (i in 1..n) {
-        a = sqr(i)
-        while (a > 0) {
-            a /= 10
-            chet += 1
-        }
-        if (chet >= n) {
-            a = sqr(i)
+        number = sqr(i)
+        count += digitNumber(sqr(i))
+        if ( count >= n) {
             break
-
         }
     }
-    while (chet >= n) {
-        cifra = a % 10
-        a /= 10
-        chet -= 1
+    while (count >= n) {
+        cifra = number % 10
+        number /= 10
+        count -= 1
     }
     return cifra
 }
@@ -284,31 +270,28 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    var chet = 2
-    var a = 1
+    var count = 2
+    var number = 1
     var cifra = 0
     var fib1 = 1
     var fib2 = 1
     var t: Int
     if ((n == 1) or (n == 2)) return 1
     else for (i in 1..n) {
-        a = fib1 + fib2
-        t = a
+        number = fib1 + fib2
+        t = number
         fib1 = fib2
-        fib2 = a
-        while (a > 0) {
-            a /= 10
-            chet += 1
-        }
-        if (chet >= n) {
-            a = t
+        fib2 = number
+        count += digitNumber(t)
+        if (count >= n) {
             break
         }
     }
-    while (chet >= n) {
-        cifra = a % 10
-        a /= 10
-        chet -= 1
+    while (count >= n) {
+        cifra = number % 10
+        number /= 10
+        count -= 1
     }
     return cifra
 }
+
