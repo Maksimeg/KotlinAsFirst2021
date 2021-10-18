@@ -3,8 +3,6 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
-import kotlin.math.PI
-import kotlin.math.abs
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -24,7 +22,6 @@ fun factorial(n: Int): Double {
     }
     return result
 }
-
 /**
  * Пример
  *
@@ -206,19 +203,8 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double {
-    var sum = x
-    var nekoe = x
-    var fact = 2
-    if (x > 20 * PI) return 0.0 else {
-        while (abs(nekoe) >= eps) {
-            nekoe = (-nekoe) * sqr(x) / (fact * (fact + 1))
-            sum += nekoe
-            fact += 2
-        }
-    }
-    return if ((sum < -1) or (sum > 1)) 0.0 else sum
-}
+fun sin(x: Double, eps: Double): Double = TODO()
+
 
 /**
  * Средняя (4 балла)
@@ -243,7 +229,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
 fun squareSequenceDigit(n: Int): Int {
     var count = 0
     var number = 1
-    var cifra = 0
+    var numeric = 0
     for (i in 1..n) {
         number = sqr(i)
         count += digitNumber(sqr(i))
@@ -252,11 +238,11 @@ fun squareSequenceDigit(n: Int): Int {
         }
     }
     while (count >= n) {
-        cifra = number % 10
+        numeric = number % 10
         number /= 10
         count -= 1
     }
-    return cifra
+    return numeric
 }
 
 
@@ -272,11 +258,11 @@ fun squareSequenceDigit(n: Int): Int {
 fun fibSequenceDigit(n: Int): Int {
     var count = 2
     var number = 1
-    var cifra = 0
+    var numeric = 0
     var fib1 = 1
     var fib2 = 1
     var t: Int
-    if ((n == 1) or (n == 2)) return 1
+    if ((n == 1) || (n == 2)) return 1
     else for (i in 1..n) {
         number = fib1 + fib2
         t = number
@@ -288,10 +274,10 @@ fun fibSequenceDigit(n: Int): Int {
         }
     }
     while (count >= n) {
-        cifra = number % 10
+        numeric = number % 10
         number /= 10
         count -= 1
     }
-    return cifra
+    return numeric
 }
 
