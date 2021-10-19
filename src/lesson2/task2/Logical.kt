@@ -6,6 +6,7 @@ import lesson1.task1.sqr
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sqrt
 
 /**
  * Пример
@@ -63,7 +64,8 @@ fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
 ): Boolean =
-    r2 - (abs(x1 - x2) + abs(y1 - y2)) >= r1
+    r2 - sqrt(sqr(x1 - x2) + sqr(y1 - y2)) >= r1
+
 
 
 /**
