@@ -226,10 +226,20 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+fun main (n: Int, count: Int,number: Int): Int {
+    var count1 = count
+    var number1 = number
+    var numeric = 0
+    while (count1 >= n) {
+        numeric = number1 % 10
+        number1 /= 10
+        count1 -= 1
+    }
+    return numeric
+}
 fun squareSequenceDigit(n: Int): Int {
     var count = 0
     var number = 1
-    var numeric = 0
     for (i in 1..n) {
         number = sqr(i)
         count += digitNumber(sqr(i))
@@ -237,12 +247,7 @@ fun squareSequenceDigit(n: Int): Int {
             break
         }
     }
-    while (count >= n) {
-        numeric = number % 10
-        number /= 10
-        count -= 1
-    }
-    return numeric
+    return main(n, count, number)
 }
 
 
@@ -255,10 +260,10 @@ fun squareSequenceDigit(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+
 fun fibSequenceDigit(n: Int): Int {
     var count = 2
     var number = 1
-    var numeric = 0
     var fib1 = 1
     var fib2 = 1
     var t: Int
@@ -273,11 +278,6 @@ fun fibSequenceDigit(n: Int): Int {
             break
         }
     }
-    while (count >= n) {
-        numeric = number % 10
-        number /= 10
-        count -= 1
-    }
-    return numeric
-}
 
+    return main(n, count, number)
+}
