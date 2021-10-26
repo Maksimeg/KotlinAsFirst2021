@@ -22,6 +22,7 @@ fun factorial(n: Int): Double {
     }
     return result
 }
+
 /**
  * Пример
  *
@@ -226,7 +227,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun main (n: Int, count: Int,number: Int): Int {
+fun main(n: Int, count: Int, number: Int): Int {
     var count1 = count
     var number1 = number
     var numeric = 0
@@ -237,13 +238,14 @@ fun main (n: Int, count: Int,number: Int): Int {
     }
     return numeric
 }
+
 fun squareSequenceDigit(n: Int): Int {
     var count = 0
     var number = 1
     for (i in 1..n) {
         number = sqr(i)
         count += digitNumber(sqr(i))
-        if ( count >= n) {
+        if (count >= n) {
             break
         }
     }

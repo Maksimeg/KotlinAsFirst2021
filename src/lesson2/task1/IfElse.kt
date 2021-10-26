@@ -79,7 +79,6 @@ fun ageDescription(age: Int): String =
     }
 
 
-
 /**
  ** Простая (2 балла)
  *
@@ -156,7 +155,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     return when {
         sqr(maximum) == sqr(minimal) + sqr(average) -> 1
         maximum > minimal + average -> -1
-        (sqr(maximum) > sqr(minimal) + sqr(average))  -> 2
+        (sqr(maximum) > sqr(minimal) + sqr(average)) -> 2
         else -> 0
     }
 }

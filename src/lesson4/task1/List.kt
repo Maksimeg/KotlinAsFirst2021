@@ -3,7 +3,6 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
-import lesson1.task1.sqr
 import kotlin.math.sqrt
 
 // Урок 4: списки
@@ -121,15 +120,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double {
-    var summa = 0.0
-    for (element in v){
-        summa = (summa + sqr(element))
-    }
-    return sqrt(summa)
-
-}
-
+fun abs(v: List<Double>): Double = sqrt(v.sumOf { it * it })
 
 
 /**
@@ -140,9 +131,9 @@ fun abs(v: List<Double>): Double {
 fun mean(list: List<Double>): Double {
     var k = 0
     var summa = 0.0
-    for (element in list){
+    for (element in list) {
         summa += element
-        k ++
+        k++
     }
     if (summa == 0.0) return 0.0
     return summa / k
@@ -166,16 +157,10 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
 fun times(a: List<Int>, b: List<Int>): Int {
-    var summa = 0
-    for ((index, element) in a.withIndex()) {
-        for ((index1, element1) in b.withIndex()) {
-            if (index == index1) {
-            summa +=element * element1}
-        }
-    }
-    return summa
+    var result = 0
+    for (i in a.indices) result += a[i] * b[i]
+    return result
 }
-
 
 
 /**
@@ -271,20 +256,21 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun auxiliary(n: Int,unit: String, five: String, ten: String): String {
-  return when(n) {
-      1 -> unit
-      2 -> unit + unit
-      3 -> unit + unit + unit
-      4 -> unit + five
-      5 -> five
-      6 -> five + unit
-      7 -> five + unit + unit
-      8 -> five + unit + unit + unit
-      9 -> unit + ten
-      else -> ""
-  }
+fun auxiliary(n: Int, unit: String, five: String, ten: String): String {
+    return when (n) {
+        1 -> unit
+        2 -> unit + unit
+        3 -> unit + unit + unit
+        4 -> unit + five
+        5 -> five
+        6 -> five + unit
+        7 -> five + unit + unit
+        8 -> five + unit + unit + unit
+        9 -> unit + ten
+        else -> ""
+    }
 }
+
 fun roman(n: Int): String {
     var number = n
     val m = number / 1000
@@ -294,10 +280,10 @@ fun roman(n: Int): String {
     val x = number / 10
     number %= 10
     val i = number
-    return auxiliary(m, "M","M","M") +
-            auxiliary(c, "C","D","M") +
-            auxiliary(x, "X","L","C") +
-            auxiliary(i, "I","V","X")
+    return auxiliary(m, "M", "M", "M") +
+            auxiliary(c, "C", "D", "M") +
+            auxiliary(x, "X", "L", "C") +
+            auxiliary(i, "I", "V", "X")
 
 
 }
