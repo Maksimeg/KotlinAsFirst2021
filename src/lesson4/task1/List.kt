@@ -330,19 +330,19 @@ fun russian(n: Int): String {
     val result1 = mutableListOf<String>()
     val result2 = mutableListOf<String>()
     val result3 = mutableListOf<String>()
-    if ((n % 100 / 10 != 1) and (n % 10 != 0)) {
+    if ((n % 100 / 10 != 1) && (n % 10 != 0)) {
         val a = n % 10
         result1 += main(n, a, units)
     }
-    if ((n % 100 > 9) and (n % 100 < 20)) {
+    if ((n % 100 > 9) && (n % 100 < 20)) {
         val a = n % 10
         result1 += main(n, a, dozens)
     }
-    if ((n % 100 >= 20) and (n % 100 <= 99)) {
+    if ((n % 100 >= 20) && (n % 100 <= 99)) {
         val a = n % 100 / 10
         result2 += main(n, a, dozens1)
     }
-    if ((n % 1000 >= 100) and (n % 1000 <= 999)) {
+    if ((n % 1000 >= 100) && (n % 1000 <= 999)) {
         val a = n % 1000 / 100
         result3 += main(n, a, hundreds)
 
@@ -353,29 +353,31 @@ fun russian(n: Int): String {
     val result7 = mutableListOf<String>()
     val number = n / 1000
     if (number != 0) {
-        if ((number % 10 == 0) or (number % 10 >= 5) and (number % 10 <= 9) or ((number % 100>=10) and (number % 100 <= 20 ))){
+        if ((number % 10 == 0) || (number % 10 >= 5) && (number % 10 <= 9) || ((number % 100 >= 10) && (number % 100 <= 20))) {
             result4 += thousand[0]
         }
-        if ((number % 10 == 1)  and (number % 100 != 11)) {
+        if ((number % 10 == 1) && (number % 100 != 11)) {
             result4 += thousand[1]
 
         }
-        if (((number % 10 >= 2) and (number % 10 <= 4) and (number % 100 > 20)) or ((number % 10 >= 2) and (number % 10 <= 4) and (number % 100 < 10))){
+        if (((number % 10 >= 2) && (number % 10 <= 4) && (number % 100 > 20)) ||
+            ((number % 10 >= 2) && (number % 10 <= 4) && (number % 100 < 10))
+        ) {
             result4 += thousand[2]
         }
-        if ((number % 100 / 10 != 1) and (number % 10 != 0)) {
+        if ((number % 100 / 10 != 1) && (number % 10 != 0)) {
             val a = number % 10
             result5 += main(number, a, units1)
         }
-        if ((number % 100 > 9) and (number % 100 < 20)) {
+        if ((number % 100 > 9) && (number % 100 < 20)) {
             val a = number % 10
             result5 += main(number, a, dozens)
         }
-        if ((number % 100 >= 20) and (number % 100 <= 99)) {
+        if ((number % 100 >= 20) && (number % 100 <= 99)) {
             val a = number % 100 / 10
             result6 += main(number, a, dozens1)
         }
-        if ((number % 1000 >= 100) and (number % 1000 <= 999)) {
+        if ((number % 1000 >= 100) && (number % 1000 <= 999)) {
             val a = number % 1000 / 100
             result7 += main(number, a, hundreds)
         }
