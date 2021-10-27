@@ -360,7 +360,7 @@ fun russian(n: Int): String {
             result4 += thousand[1]
 
         }
-        if ((number % 10 >= 2) and (number % 10 <= 4)) {
+        if ((number % 10 >= 2) and (number % 10 <= 4) and (number % 100 < 10) and  (number % 100 > 20)){
             result4 += thousand[2]
         }
         if ((number % 100 / 10 != 1) and (number % 10 != 0)) {
