@@ -356,11 +356,11 @@ fun russian(n: Int): String {
         if ((number % 10 == 0) or (number % 10 >= 5) and (number % 10 <= 9) or ((number % 100>=10) and (number % 100 <= 20 ))){
             result4 += thousand[0]
         }
-        if (number % 10 == 1) {
+        if ((number % 10 == 1)  and (number % 100 != 11)) {
             result4 += thousand[1]
 
         }
-        if ((number % 10 >= 2) and (number % 10 <= 4) and (number % 100 < 10) and  (number % 100 > 20)){
+        if (((number % 10 >= 2) and (number % 10 <= 4) and (number % 100 > 20)) or ((number % 10 >= 2) and (number % 10 <= 4) and (number % 100 < 10))){
             result4 += thousand[2]
         }
         if ((number % 100 / 10 != 1) and (number % 10 != 0)) {
