@@ -313,11 +313,9 @@ val dozens1 = mutableListOf(
 )
 val hundreds = mutableListOf(
     "", "сто", "двести", "триста", "четыреста",
-    "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот",
-
-    )
+    "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"
+)
 val thousand = mutableListOf("тысяч", "тысяча", "тысячи")
-
 fun main(n: Int, a: Int, dozens: MutableList<String>): MutableList<String> {
     val result = mutableListOf<String>()
     for (i in dozens.indices) {
@@ -355,7 +353,7 @@ fun russian(n: Int): String {
     val result7 = mutableListOf<String>()
     val number = n / 1000
     if (number != 0) {
-        if ((number % 10 == 0) or (number % 10 >= 5) and (number % 10 <= 9)) {
+        if ((number % 10 == 0) or (number % 10 >= 5) and (number % 10 <= 9) or ((number % 100>=10) and (number % 100 <= 20 ))){
             result4 += thousand[0]
         }
         if (number % 10 == 1) {
@@ -365,7 +363,7 @@ fun russian(n: Int): String {
         if ((number % 10 >= 2) and (number % 10 <= 4)) {
             result4 += thousand[2]
         }
-        if ((number % 100 / 10 != 1) and (number % 10 != 0))   {
+        if ((number % 100 / 10 != 1) and (number % 10 != 0)) {
             val a = number % 10
             result5 += main(number, a, units1)
         }
