@@ -295,4 +295,98 @@ fun roman(n: Int): String {
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+val units = mutableListOf(
+    "", "один", "два", "три", "четыре",
+    "пять", "шесть", "семь", "восемь", "девять"
+)
+val units1 = mutableListOf(
+    "", "одна", "две", "три", "четыре",
+    "пять", "шесть", "семь", "восемь", "девять"
+)
+val dozens = mutableListOf(
+    "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
+    "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
+)
+val dozens1 = mutableListOf(
+    "", "", "двадцать", "тридцать", "сорок", "пятьдесят",
+    "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
+)
+val hundreds = mutableListOf(
+    "", "сто", "двести", "триста", "четыреста",
+    "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот",
+
+    )
+val thousand = mutableListOf("тысяч", "тысяча", "тысячи")
+
+fun main(n: Int, a: Int, dozens: MutableList<String>): MutableList<String> {
+    val result = mutableListOf<String>()
+    for (i in dozens.indices) {
+        if (a == i) {
+            result += dozens[i]
+        }
+    }
+    return result
+}
+
+fun russian(n: Int): String {
+    val result1 = mutableListOf<String>()
+    val result2 = mutableListOf<String>()
+    val result3 = mutableListOf<String>()
+    if ((n % 100 / 10 != 1) and (n % 10 != 0)) {
+        val a = n % 10
+        result1 += main(n, a, units)
+    }
+    if ((n % 100 > 9) and (n % 100 < 20)) {
+        val a = n % 10
+        result1 += main(n, a, dozens)
+    }
+    if ((n % 100 >= 20) and (n % 100 <= 99)) {
+        val a = n % 100 / 10
+        result2 += main(n, a, dozens1)
+    }
+    if ((n % 1000 >= 100) and (n % 1000 <= 999)) {
+        val a = n % 1000 / 100
+        result3 += main(n, a, hundreds)
+
+    }
+    val result4 = mutableListOf<String>()
+    val result5 = mutableListOf<String>()
+    val result6 = mutableListOf<String>()
+    val result7 = mutableListOf<String>()
+    val number = n / 1000
+    if (number != 0) {
+        if ((number % 10 == 0) or (number % 10 >= 5) and (number % 10 <= 9)) {
+            result4 += thousand[0]
+        }
+        if (number % 10 == 1) {
+            result4 += thousand[1]
+
+        }
+        if ((number % 10 >= 2) and (number % 10 <= 4)) {
+            result4 += thousand[2]
+        }
+        if ((number % 100 / 10 != 1) and (number % 10 != 0))   {
+            val a = number % 10
+            result5 += main(number, a, units1)
+        }
+        if ((number % 100 > 9) and (number % 100 < 20)) {
+            val a = number % 10
+            result5 += main(number, a, dozens)
+        }
+        if ((number % 100 >= 20) and (number % 100 <= 99)) {
+            val a = number % 100 / 10
+            result6 += main(number, a, dozens1)
+        }
+        if ((number % 1000 >= 100) and (number % 1000 <= 999)) {
+            val a = number % 1000 / 100
+            result7 += main(number, a, hundreds)
+        }
+    }
+    val result = result7 + result6 + result5 + result4 + result3 + result2 + result1
+    return result.joinToString(separator = " ", postfix = "")
+}
+
+
+
+
+
