@@ -227,16 +227,15 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun main(n: Int, count: Int, number: Int): Int {
+fun auxiliary(n: Int, count: Int, number: Int): Int {
     var count1 = count
     var number1 = number
-    var numeric = 0
-    while (count1 >= n) {
-        numeric = number1 % 10
+    while (count1 > n) {
         number1 /= 10
         count1 -= 1
     }
-    return numeric
+
+    return number1 % 10
 }
 
 fun squareSequenceDigit(n: Int): Int {
@@ -249,7 +248,7 @@ fun squareSequenceDigit(n: Int): Int {
             break
         }
     }
-    return main(n, count, number)
+    return auxiliary(n, count, number)
 }
 
 
@@ -281,5 +280,5 @@ fun fibSequenceDigit(n: Int): Int {
         }
     }
 
-    return main(n, count, number)
+    return auxiliary(n, count, number)
 }

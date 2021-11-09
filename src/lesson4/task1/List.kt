@@ -130,13 +130,13 @@ fun abs(v: List<Double>): Double = sqrt(v.sumOf { it * it })
  */
 fun mean(list: List<Double>): Double {
     var k = 0
-    var summa = 0.0
+    var sum = 0.0
     for (element in list) {
-        summa += element
+        sum += element
         k++
     }
-    if (summa == 0.0) return 0.0
-    return summa / k
+    if (sum == 0.0) return 0.0
+    return sum / k
 }
 
 /**
@@ -256,8 +256,8 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun auxiliary(n: Int, unit: String, five: String, ten: String): String {
-    return when (n) {
+fun auxiliary(n: Int, unit: String, five: String, ten: String): String =
+    when (n) {
         1 -> unit
         2 -> unit + unit
         3 -> unit + unit + unit
@@ -269,7 +269,6 @@ fun auxiliary(n: Int, unit: String, five: String, ten: String): String {
         9 -> unit + ten
         else -> ""
     }
-}
 
 fun roman(n: Int): String {
     var number = n
@@ -288,6 +287,7 @@ fun roman(n: Int): String {
 
 }
 
+
 /**
  * Очень сложная (7 баллов)
  *
@@ -299,7 +299,7 @@ val units = mutableListOf(
     "", "один", "два", "три", "четыре",
     "пять", "шесть", "семь", "восемь", "девять"
 )
-val units1 = mutableListOf(
+val Unitstothousands = mutableListOf(
     "", "одна", "две", "три", "четыре",
     "пять", "шесть", "семь", "восемь", "девять"
 )
@@ -307,7 +307,7 @@ val dozens = mutableListOf(
     "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
     "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
 )
-val dozens1 = mutableListOf(
+val roundtens = mutableListOf(
     "", "", "двадцать", "тридцать", "сорок", "пятьдесят",
     "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
 )
@@ -316,13 +316,9 @@ val hundreds = mutableListOf(
     "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"
 )
 val thousand = mutableListOf("тысяч", "тысяча", "тысячи")
-fun main(n: Int, a: Int, dozens: MutableList<String>): MutableList<String> {
+fun auxiliary(n: Int, a: Int, dozens: MutableList<String>): MutableList<String> {
     val result = mutableListOf<String>()
-    for (i in dozens.indices) {
-        if (a == i) {
-            result += dozens[i]
-        }
-    }
+    result += dozens[a]
     return result
 }
 
@@ -332,19 +328,19 @@ fun russian(n: Int): String {
     val result3 = mutableListOf<String>()
     if ((n % 100 / 10 != 1) && (n % 10 != 0)) {
         val a = n % 10
-        result1 += main(n, a, units)
+        result1 += auxiliary(n, a, units)
     }
     if ((n % 100 > 9) && (n % 100 < 20)) {
         val a = n % 10
-        result1 += main(n, a, dozens)
+        result1 += auxiliary(n, a, dozens)
     }
-    if ((n % 100 >= 20) && (n % 100 <= 99)) {
+    if (n % 100 >= 20) {
         val a = n % 100 / 10
-        result2 += main(n, a, dozens1)
+        result2 += auxiliary(n, a, roundtens)
     }
-    if ((n % 1000 >= 100) && (n % 1000 <= 999)) {
+    if (n % 1000 >= 100) {
         val a = n % 1000 / 100
-        result3 += main(n, a, hundreds)
+        result3 += auxiliary(n, a, hundreds)
 
     }
     val result4 = mutableListOf<String>()
@@ -366,19 +362,19 @@ fun russian(n: Int): String {
         }
         if ((number % 100 / 10 != 1) && (number % 10 != 0)) {
             val a = number % 10
-            result5 += main(number, a, units1)
+            result5 += auxiliary(number, a, Unitstothousands)
         }
         if ((number % 100 > 9) && (number % 100 < 20)) {
             val a = number % 10
-            result5 += main(number, a, dozens)
+            result5 += auxiliary(number, a, dozens)
         }
         if ((number % 100 >= 20) && (number % 100 <= 99)) {
             val a = number % 100 / 10
-            result6 += main(number, a, dozens1)
+            result6 += auxiliary(number, a, roundtens)
         }
         if ((number % 1000 >= 100) && (number % 1000 <= 999)) {
             val a = number % 1000 / 100
-            result7 += main(number, a, hundreds)
+            result7 += auxiliary(number, a, hundreds)
         }
     }
     val result = result7 + result6 + result5 + result4 + result3 + result2 + result1
