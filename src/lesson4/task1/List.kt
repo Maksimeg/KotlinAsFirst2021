@@ -279,7 +279,7 @@ fun roman(n: Int): String {
     val x = number / 10
     number %= 10
     val i = number
-    return auxiliary(m, "M", "M", "M") +
+    return "M".repeat(m) +
             auxiliary(c, "C", "D", "M") +
             auxiliary(x, "X", "L", "C") +
             auxiliary(i, "I", "V", "X")
@@ -322,64 +322,52 @@ fun auxiliary(n: Int, a: Int, dozens: MutableList<String>): MutableList<String> 
     return result
 }
 
+fun auxiliarycounting(n: Int, result: MutableList<String>): MutableList<String> {
+    if (n % 1000 >= 100) {
+        val a = n % 1000 / 100
+        result += auxiliary(n, a, hundreds)
+    }
+    if (n % 100 >= 20) {
+        val a = n % 100 / 10
+        result += auxiliary(n, a, roundtens)
+    }
+    if ((n % 100 > 9) && (n % 100 < 20)) {
+        val a = n % 10
+        result += auxiliary(n, a, dozens)
+    }
+    return result
+}
+
 fun russian(n: Int): String {
-    val result1 = mutableListOf<String>()
-    val result2 = mutableListOf<String>()
-    val result3 = mutableListOf<String>()
+    val result4 = mutableListOf<String>()
+    val result1 = auxiliarycounting(n, result4)
     if ((n % 100 / 10 != 1) && (n % 10 != 0)) {
         val a = n % 10
         result1 += auxiliary(n, a, units)
     }
-    if ((n % 100 > 9) && (n % 100 < 20)) {
-        val a = n % 10
-        result1 += auxiliary(n, a, dozens)
-    }
-    if (n % 100 >= 20) {
-        val a = n % 100 / 10
-        result2 += auxiliary(n, a, roundtens)
-    }
-    if (n % 1000 >= 100) {
-        val a = n % 1000 / 100
-        result3 += auxiliary(n, a, hundreds)
-
-    }
-    val result4 = mutableListOf<String>()
-    val result5 = mutableListOf<String>()
-    val result6 = mutableListOf<String>()
-    val result7 = mutableListOf<String>()
+    val result2 = mutableListOf<String>()
     val number = n / 1000
     if (number != 0) {
-        if ((number % 10 == 0) || (number % 10 >= 5) && (number % 10 <= 9) || ((number % 100 >= 10) && (number % 100 <= 20))) {
-            result4 += thousand[0]
-        }
-        if ((number % 10 == 1) && (number % 100 != 11)) {
-            result4 += thousand[1]
-
-        }
-        if (((number % 10 >= 2) && (number % 10 <= 4) && ((number % 100 > 20) || (number % 100 < 10)))
-        ) {
-            result4 += thousand[2]
-        }
-        if ((number % 100 / 10 != 1) && (number % 10 != 0)) {
-            val a = number % 10
-            result5 += auxiliary(number, a, Unitstothousands)
-        }
-        if ((number % 100 > 9) && (number % 100 < 20)) {
-            val a = number % 10
-            result5 += auxiliary(number, a, dozens)
-        }
-        if ((number % 100 >= 20) && (number % 100 <= 99)) {
-            val a = number % 100 / 10
-            result6 += auxiliary(number, a, roundtens)
-        }
-        if ((number % 1000 >= 100) && (number % 1000 <= 999)) {
-            val a = number % 1000 / 100
-            result7 += auxiliary(number, a, hundreds)
+        when {
+            ((number % 10 == 0) || (number in 5..9) ||
+                    ((number % 100 >= 10) && (number % 100 <= 20))) -> result2 += thousand[0]
+            ((number % 10 == 1) && (number % 100 != 11)) -> result2 += thousand[1]
+            (((number % 10 >= 2) && (number % 10 <= 4) &&
+                    ((number % 100 > 20) || (number % 100 < 10)))) -> result2 += thousand[2]
         }
     }
-    val result = result7 + result6 + result5 + result4 + result3 + result2 + result1
+    val result5 = mutableListOf<String>()
+    val result3 = auxiliarycounting(number, result5)
+    if ((number % 100 / 10 != 1) && (number % 10 != 0)) {
+        val a = number % 10
+        result3 += auxiliary(number, a, Unitstothousands)
+    }
+
+    val result = result3 + result2 + result1
     return result.joinToString(separator = " ", postfix = "")
 }
+
+
 
 
 
