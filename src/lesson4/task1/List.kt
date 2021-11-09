@@ -349,7 +349,7 @@ fun russian(n: Int): String {
     val number = n / 1000
     if (number != 0) {
         when {
-            ((number % 10 == 0) || (number in 5..9) ||
+            ((number % 10 == 0) || (number % 10 in 5..9) ||
                     ((number % 100 >= 10) && (number % 100 <= 20))) -> result2 += thousand[0]
             ((number % 10 == 1) && (number % 100 != 11)) -> result2 += thousand[1]
             (((number % 10 >= 2) && (number % 10 <= 4) &&
