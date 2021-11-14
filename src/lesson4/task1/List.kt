@@ -129,14 +129,12 @@ fun abs(v: List<Double>): Double = sqrt(v.sumOf { it * it })
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
 fun mean(list: List<Double>): Double {
-    var k = 0
     var sum = 0.0
     for (element in list) {
         sum += element
-        k++
     }
     if (sum == 0.0) return 0.0
-    return sum / k
+    return sum / list.size
 }
 
 /**
@@ -299,7 +297,7 @@ val units = mutableListOf(
     "", "один", "два", "три", "четыре",
     "пять", "шесть", "семь", "восемь", "девять"
 )
-val Unitstothousands = mutableListOf(
+val UnitsToThousands = mutableListOf(
     "", "одна", "две", "три", "четыре",
     "пять", "шесть", "семь", "восемь", "девять"
 )
@@ -307,7 +305,7 @@ val dozens = mutableListOf(
     "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
     "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
 )
-val roundtens = mutableListOf(
+val plenty = mutableListOf(
     "", "", "двадцать", "тридцать", "сорок", "пятьдесят",
     "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
 )
@@ -316,53 +314,52 @@ val hundreds = mutableListOf(
     "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"
 )
 val thousand = mutableListOf("тысяч", "тысяча", "тысячи")
-fun auxiliary(n: Int, a: Int, dozens: MutableList<String>): MutableList<String> {
+fun supportiveResult(n: Int, a: Int, dozens: List<String>): MutableList<String> {
     val result = mutableListOf<String>()
     result += dozens[a]
     return result
 }
 
-fun auxiliarycounting(n: Int, result: MutableList<String>): MutableList<String> {
+fun intermediateResult(n: Int, result: MutableList<String>): MutableList<String> {
     if (n % 1000 >= 100) {
         val a = n % 1000 / 100
-        result += auxiliary(n, a, hundreds)
+        result += supportiveResult(n, a, hundreds)
     }
     if (n % 100 >= 20) {
         val a = n % 100 / 10
-        result += auxiliary(n, a, roundtens)
+        result += supportiveResult(n, a, plenty)
     }
     if ((n % 100 > 9) && (n % 100 < 20)) {
         val a = n % 10
-        result += auxiliary(n, a, dozens)
+        result += supportiveResult(n, a, dozens)
+    }
+    return result
+}
+
+fun resultUnits(n: Int, units: List<String>): MutableList<String> {
+    val roster = mutableListOf<String>()
+    val result = intermediateResult(n, roster)
+    if ((n % 100 / 10 != 1) && (n % 10 != 0)) {
+        val a = n % 10
+        result += supportiveResult(n, a, units)
     }
     return result
 }
 
 fun russian(n: Int): String {
-    val result4 = mutableListOf<String>()
-    val result1 = auxiliarycounting(n, result4)
-    if ((n % 100 / 10 != 1) && (n % 10 != 0)) {
-        val a = n % 10
-        result1 += auxiliary(n, a, units)
-    }
+    val result1 = resultUnits(n, units)
     val result2 = mutableListOf<String>()
     val number = n / 1000
     if (number != 0) {
         when {
-            ((number % 10 == 0) || (number % 10 in 5..9) ||
-                    ((number % 100 >= 10) && (number % 100 <= 20))) -> result2 += thousand[0]
+            (number % 10 == 0) || (number % 10 in 5..9) ||
+                    (number % 100 in 10..20) -> result2 += thousand[0]
             ((number % 10 == 1) && (number % 100 != 11)) -> result2 += thousand[1]
-            (((number % 10 >= 2) && (number % 10 <= 4) &&
-                    ((number % 100 > 20) || (number % 100 < 10)))) -> result2 += thousand[2]
+            ((number % 10 in 2..4) &&
+                    ((number % 100 > 20) || (number % 100 < 10))) -> result2 += thousand[2]
         }
     }
-    val result5 = mutableListOf<String>()
-    val result3 = auxiliarycounting(number, result5)
-    if ((number % 100 / 10 != 1) && (number % 10 != 0)) {
-        val a = number % 10
-        result3 += auxiliary(number, a, Unitstothousands)
-    }
-
+    val result3 =resultUnits(number, UnitsToThousands)
     val result = result3 + result2 + result1
     return result.joinToString(separator = " ", postfix = "")
 }
