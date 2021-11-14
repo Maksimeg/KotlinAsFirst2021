@@ -174,7 +174,16 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
+    val res = mutableMapOf<String, Double>()
+    val itemCost = mutableMapOf<String, List<Double>>()
+    for ((stock, price) in stockPrices) {
+        itemCost[stock] = (itemCost[stock] ?: mutableListOf()) + price
+    }
+    for ((stock, price) in itemCost)
+        res[stock] = price.sum() / price.size
+    return res
+}
 
 /**
  * Средняя (4 балла)
@@ -216,7 +225,13 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
+fun extractRepeats(list: List<String>): Map<String, Int> {
+    val res = mutableMapOf<String, Int>()
+    for (element in list){
+        res[element]= (res[element] ?: 0) + 1
+    }
+    return res.filterValues { it > 1 }
+}
 
 /**
  * Средняя (3 балла)
