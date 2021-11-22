@@ -3,7 +3,6 @@
 package lesson5.task1
 
 
-
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -227,8 +226,8 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  */
 fun extractRepeats(list: List<String>): Map<String, Int> {
     val res = mutableMapOf<String, Int>()
-    for (element in list){
-        res[element]= (res[element] ?: 0) + 1
+    for (element in list) {
+        res[element] = (res[element] ?: 0) + 1
     }
     return res.filterValues { it > 1 }
 }
@@ -306,7 +305,7 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     for (i in list.indices) {
         if (list[i] in map)
             return Pair(map[list[i]]!!, i)
-        k ++
+        k++
         map[number - k] = i
     }
     return Pair(-1, -1)
