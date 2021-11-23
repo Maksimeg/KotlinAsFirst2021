@@ -254,7 +254,7 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun auxiliary(n: Int, unit: String, five: String, ten: String): String =
+fun romanNumerals(n: Int, unit: String, five: String, ten: String): String =
     when (n) {
         1 -> unit
         2 -> unit + unit
@@ -278,9 +278,9 @@ fun roman(n: Int): String {
     number %= 10
     val i = number
     return "M".repeat(m) +
-            auxiliary(c, "C", "D", "M") +
-            auxiliary(x, "X", "L", "C") +
-            auxiliary(i, "I", "V", "X")
+            romanNumerals(c, "C", "D", "M") +
+            romanNumerals(x, "X", "L", "C") +
+            romanNumerals(i, "I", "V", "X")
 
 
 }
@@ -297,7 +297,7 @@ val units = mutableListOf(
     "", "один", "два", "три", "четыре",
     "пять", "шесть", "семь", "восемь", "девять"
 )
-val UnitsToThousands = mutableListOf(
+val unitsThousands = mutableListOf(
     "", "одна", "две", "три", "четыре",
     "пять", "шесть", "семь", "восемь", "девять"
 )
@@ -320,7 +320,8 @@ fun supportiveResult(n: Int, a: Int, dozens: List<String>): MutableList<String> 
     return res
 }
 
-fun intermediateResult(n: Int, res: MutableList<String>): MutableList<String> {
+fun intermediateResult(n: Int): MutableList<String> {
+    val res = mutableListOf<String>()
     if (n % 1000 >= 100) {
         val a = n % 1000 / 100
         res += supportiveResult(n, a, hundreds)
@@ -337,8 +338,7 @@ fun intermediateResult(n: Int, res: MutableList<String>): MutableList<String> {
 }
 
 fun resultUnits(n: Int, units: List<String>): MutableList<String> {
-    val roster = mutableListOf<String>()
-    val res = intermediateResult(n, roster)
+    val res = intermediateResult(n)
     if ((n % 100 / 10 != 1) && (n % 10 != 0)) {
         val a = n % 10
         res += supportiveResult(n, a, units)
@@ -354,12 +354,12 @@ fun russian(n: Int): String {
         when {
             (number % 10 == 0) || (number % 10 in 5..9) ||
                     (number % 100 in 10..20) -> res2 += thousand[0]
-            ((number % 10 == 1) && (number % 100 != 11)) -> res2 += thousand[1]
+            (number % 10 == 1) -> res2 += thousand[1]
             ((number % 10 in 2..4) &&
-                    ((number % 100 > 20) || (number % 100 < 10))) -> res2+= thousand[2]
+                    ((number % 100 > 20) || (number % 100 < 10))) -> res2 += thousand[2]
         }
     }
-    val res3 =resultUnits(number, UnitsToThousands)
+    val res3 = resultUnits(number, unitsThousands)
     val res = res3 + res2 + res1
     return res.joinToString(separator = " ", postfix = "")
 }

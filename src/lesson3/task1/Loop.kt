@@ -227,7 +227,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun FinalResult(n: Int, count: Int, number: Int): Int {
+fun finalResult(n: Int, count: Int, number: Int): Int {
     var count1 = count
     var number1 = number
     while (count1 > n) {
@@ -246,7 +246,7 @@ fun squareSequenceDigit(n: Int): Int {
         number = sqr(a)
         count += digitNumber(sqr(a))
     }
-    return FinalResult(n, count, number)
+    return finalResult(n, count, number)
 }
 
 
@@ -274,5 +274,5 @@ fun fibSequenceDigit(n: Int): Int {
         fib2 = number
         count += digitNumber(t)
     }
-    return FinalResult(n, count, number)
+    return finalResult(n, count, number)
 }
