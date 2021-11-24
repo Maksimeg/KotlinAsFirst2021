@@ -173,7 +173,7 @@ fun mostExpensive(description: String): String {
             price = productPriceElement.last().toDouble()
             res = productPriceElement.first()
         }
-        if (price == 0.0) return ""
+        if (productPriceElement.size != 2) return ""
     }
     return res
 }
