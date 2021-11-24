@@ -7,6 +7,7 @@ package lesson6.task1
 // Рекомендуемое количество баллов = 11
 // Вместе с предыдущими уроками (пять лучших, 2-6) = 40/54
 
+
 /**
  * Пример
  *
@@ -162,7 +163,20 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    val productPrice = description.split("; ")
+    var price = 0.0
+    var res = ""
+    for (i in productPrice) {
+        val productPriceElement = i.split(" ")
+        if ((productPriceElement.size == 2) && (productPriceElement.last().toDouble() >= price)) {
+            price = productPriceElement.last().toDouble()
+            res = productPriceElement.first()
+        }
+        if (price == 0.0) return ""
+    }
+    return res
+}
 
 /**
  * Сложная (6 баллов)
