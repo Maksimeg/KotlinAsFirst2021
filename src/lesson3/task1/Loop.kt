@@ -3,7 +3,11 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
+import kotlin.math.PI
+import kotlin.math.abs
+import kotlin.math.pow
 import kotlin.math.sqrt
+
 
 // Урок 3: циклы
 // Максимальное количество баллов = 9
@@ -204,7 +208,23 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+fun sin(x: Double, eps: Double): Double {
+    val a = x % (2 * PI)
+    var result = a
+    var b = 1.0
+    var element = 1.0
+    var fact =  1.0
+    var minus = -1
+    while (abs(element) >= eps){
+        fact *= (b+1) * (b+2)
+        b += 2
+        element  = minus * a.pow(b) / fact
+        minus *= -1
+        result += element
+
+    }
+    return result
+}
 
 
 /**
