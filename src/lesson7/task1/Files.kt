@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import java.util.*
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -75,7 +76,21 @@ fun deleteMarked(inputName: String, outputName: String) {
  * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
  *
  */
-fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
+fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
+    val result = mutableMapOf<String, Int>()
+    val text = File(inputName).readText().lowercase(Locale.getDefault())
+    val list = substrings.distinct()
+    for (i in list.indices) {
+        if (!result.contains(list[i]))
+            result[list[i]] = 0
+        for (k in text.indices)
+            if (text.startsWith(list[i].lowercase(Locale.getDefault()), k))
+                result[list[i]] = result[list[i]]!! + 1
+        }
+return result
+}
+
+
 
 
 /**
@@ -113,7 +128,22 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    var maxLineLength = 0
+    for (line in File(inputName).readLines()){
+        if (line.trim().length > maxLineLength)
+            maxLineLength = line.trim().length
+    }
+    for (line in File(inputName).readLines()) {
+        var count = (maxLineLength- line.trim().length) / 2
+        while (count > 0) {
+            writer.write(" ")
+            count--
+        }
+        writer.write(line.trim())
+        writer.newLine()
+    }
+    writer.close()
 }
 
 /**
