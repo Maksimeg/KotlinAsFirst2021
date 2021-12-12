@@ -212,7 +212,7 @@ fun sin(x: Double, eps: Double): Double {
     val a = x % (2 * PI)
     var result = a
     var b = 1.0
-    var element = 1.0
+    var element = a
     var fact =  1.0
     var minus = -1
     while (abs(element) >= eps){

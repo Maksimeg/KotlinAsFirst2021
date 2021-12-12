@@ -2,7 +2,6 @@
 
 package lesson6.task1
 
-import java.util.*
 
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
@@ -154,12 +153,12 @@ fun plusMinus(expression: String): Int = TODO()
  */
 fun firstDuplicateIndex(str: String): Int {
     var repetitions = 0
-    val parts = Regex( """ """).split(str)
+    val parts = Regex(""" """).split(str)
     if (parts.size == 1) return -1
     for (i in 1 until parts.size) {
-        if (parts[i].lowercase(Locale.getDefault()) == parts[i - 1].lowercase(Locale.getDefault()))
+        if (parts[i].lowercase() == parts[i - 1].lowercase())
             return repetitions
-        repetitions += parts[i-1].length + 1
+        repetitions += parts[i - 1].length + 1
     }
     return -1
 
@@ -177,10 +176,10 @@ fun firstDuplicateIndex(str: String): Int {
  * Все цены должны быть больше нуля либо равны нулю.
  */
 fun mostExpensive(description: String): String {
-    val productPrice = description.split("; ")
+    val productsPrices = description.split("; ")
     var price = 0.0
     var res = ""
-    for (i in productPrice) {
+    for (i in productsPrices) {
         val productPriceElement = i.split(" ")
         if ((productPriceElement.size == 2) && (productPriceElement.last().toDouble() >= price)) {
             price = productPriceElement.last().toDouble()

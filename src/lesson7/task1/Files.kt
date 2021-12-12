@@ -78,13 +78,13 @@ fun deleteMarked(inputName: String, outputName: String) {
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
     val result = mutableMapOf<String, Int>()
-    val text = File(inputName).readText().lowercase(Locale.getDefault())
+    val text = File(inputName).readText().lowercase()
     val list = substrings.distinct()
     for (i in list.indices) {
         if (!result.contains(list[i]))
             result[list[i]] = 0
         for (k in text.indices)
-            if (text.startsWith(list[i].lowercase(Locale.getDefault()), k))
+            if (text.startsWith(list[i].lowercase(), k))
                 result[list[i]] = result[list[i]]!! + 1
         }
 return result
