@@ -110,7 +110,7 @@ class PhoneBook {
      * Порядок людей / порядок телефонов в книге не должен иметь значения.
      */
     override fun equals(other: Any?): Boolean = other is PhoneBook &&
-        this.phones.size == other.phones.size
+        phones.size == other.phones.size
 
     override fun hashCode(): Int {
         var result = book.hashCode()

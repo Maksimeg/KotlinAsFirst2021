@@ -10,17 +10,17 @@ import lesson1.task1.sqr
  */
 fun Complex(s: String): Complex {
     var str = s
-    val isReNegative = str.startsWith("-")
-    if (isReNegative) {
+    val negative = str.startsWith("-")
+    if (negative) {
         str = str.replaceFirst("-", "")
     }
-    if (isReNegative && s.contains("+"))
+    if (negative && s.contains("+"))
         return Complex(-str.split("+")[0].toDouble(), str.split("+")[1].removeSuffix("i").toDouble())
-    if (!isReNegative && s.contains("+"))
+    if (!negative && s.contains("+"))
         return Complex(str.split("+")[0].toDouble(), str.split("+")[1].removeSuffix("i").toDouble())
-    if (isReNegative && s.contains("-"))
+    if (negative && s.contains("-"))
         return Complex(-str.split("-")[0].toDouble(), -str.split("-")[1].removeSuffix("i").toDouble())
-    if (!isReNegative && s.contains("-"))
+    if (!negative && s.contains("-"))
         return Complex(str.split("-")[0].toDouble(), -str.split("-")[1].removeSuffix("i").toDouble())
     throw IllegalArgumentException("Wrong input syntax. Syntax should be: x+yi")
 }
@@ -76,10 +76,10 @@ class Complex(val re: Double, val im: Double) {
     /**
      * Хэш-код
      */
+
     override fun hashCode(): Int {
-        var result = 1
-        result = 31 * result + re.toInt()
-        result = 31 * result + im.toInt()
+        var result = re.hashCode()
+        result = 31 * result + im.hashCode()
         return result
     }
 
@@ -87,5 +87,9 @@ class Complex(val re: Double, val im: Double) {
     /**
      * Преобразование в строку
      */
-    override fun toString(): String = "${re}+${im}i"
+    override fun toString():  String = when {
+        im > 0 -> "$re+${im}i"
+        im < 0 -> "$re${im}i"
+        else -> "$re"
+    }
 }
